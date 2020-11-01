@@ -9,7 +9,7 @@
 @section('content')
 
     @component('components.breadcrumbs')
-        <a href="#">Home</a>
+        <a href="{{ route('landing-page')}}">Home</a>
         <i class="fa fa-chevron-right breadcrumb-separator"></i>
         <span>Shopping Cart</span>
     @endcomponent
@@ -40,7 +40,7 @@
                 @foreach (Cart::content() as $item)
                 <div class="cart-table-row">
                     <div class="cart-table-row-left">
-                        <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ productImage($item->model->image) }}" alt="item" class="cart-table-img"></a>
+                        <a href="{{ route('shop.show', $item->model->slug) }}"><img src="" alt="item" class="cart-table-img"></a>
                         <div class="cart-item-details">
                             <div class="cart-table-item"><a href="{{ route('shop.show', $item->model->slug) }}">{{ $item->model->name }}</a></div>
                             <div class="cart-table-description">{{ $item->model->details }}</div>
@@ -55,11 +55,11 @@
                                 <button type="submit" class="cart-options">Remove</button>
                             </form>
 
-                            <form action="{{ route('cart.switchToSaveForLater', $item->rowId) }}" method="POST">
+                            {{-- <form action="{{ route('cart.switchToSaveForLater', $item->rowId) }}" method="POST">
                                 {{ csrf_field() }}
 
                                 <button type="submit" class="cart-options">Save for Later</button>
-                            </form>
+                            </form> --}}
                         </div>
                         <div>
                             <select class="quantity" data-id="{{ $item->rowId }}" data-productQuantity="{{ $item->model->quantity }}">
@@ -68,14 +68,14 @@
                                 @endfor
                             </select>
                         </div>
-                        <div>{{ presentPrice($item->subtotal) }}</div>
+                        <div>{{ $item->subtotal }}</div>
                     </div>
                 </div> <!-- end cart-table-row -->
                 @endforeach
 
             </div> <!-- end cart-table -->
 
-            @if (! session()->has('coupon'))
+            {{-- @if (! session()->has('coupon'))
 
                 <a href="#" class="have-code">Have a Code?</a>
 
@@ -86,7 +86,7 @@
                         <button type="submit" class="button button-plain">Apply</button>
                     </form>
                 </div> <!-- end have-code-container -->
-            @endif
+            @endif --}}
 
             <div class="cart-totals">
                 <div class="cart-totals-left">
@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="cart-totals-right">
-                    <div>
+                    {{-- <div>
                         Subtotal <br>
                         @if (session()->has('coupon'))
                             Code ({{ session()->get('coupon')['name'] }})
@@ -108,8 +108,8 @@
                         @endif
                         Tax ({{config('cart.tax')}}%)<br>
                         <span class="cart-totals-total">Total</span>
-                    </div>
-                    <div class="cart-totals-subtotal">
+                    </div> --}}
+                    {{-- <div class="cart-totals-subtotal">
                         {{ presentPrice(Cart::subtotal()) }} <br>
                         @if (session()->has('coupon'))
                             -{{ presentPrice($discount) }} <br>&nbsp;<br>
@@ -118,13 +118,13 @@
                         @endif
                         {{ presentPrice($newTax) }} <br>
                         <span class="cart-totals-total">{{ presentPrice($newTotal) }}</span>
-                    </div>
+                    </div> --}}
                 </div>
             </div> <!-- end cart-totals -->
 
             <div class="cart-buttons">
                 <a href="{{ route('shop.index') }}" class="button">Continue Shopping</a>
-                <a href="{{ route('checkout.index') }}" class="button-primary">Proceed to Checkout</a>
+                {{-- <a href="{{ route('checkout.index') }}" class="button-primary">Proceed to Checkout</a> --}}
             </div>
 
             @else
@@ -136,7 +136,7 @@
 
             @endif
 
-            @if (Cart::instance('saveForLater')->count() > 0)
+            {{-- @if (Cart::instance('saveForLater')->count() > 0)
 
             <h2>{{ Cart::instance('saveForLater')->count() }} item(s) Saved For Later</h2>
 
@@ -177,7 +177,7 @@
 
             <h3>You have no items Saved for Later.</h3>
 
-            @endif
+            @endif --}}
 
         </div>
 

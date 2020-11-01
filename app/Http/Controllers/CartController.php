@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
@@ -30,21 +31,21 @@ class CartController extends Controller
     //   * @param  \App\Product  $product
     //   * @return \Illuminate\Http\Response
     //   */
-    //  public function store(Product $product)
-    //  {
-    //      $duplicates = Cart::search(function ($cartItem, $rowId) use ($product) {
-    //          return $cartItem->id === $product->id;
-    //      });
+     public function store(Product $product)
+     {
+        //  $duplicates = Cart::search(function ($cartItem, $rowId) use ($product) {
+        //      return $cartItem->id === $product->id;
+        //  });
  
-    //      if ($duplicates->isNotEmpty()) {
-    //          return redirect()->route('cart.index')->with('success_message', 'Item is already in your cart!');
-    //      }
+        //  if ($duplicates->isNotEmpty()) {
+        //      return redirect()->route('cart.index')->with('success_message', 'Item is already in your cart!');
+        //  }
  
-    //      Cart::add($product->id, $product->name, 1, $product->price)
-    //          ->associate('App\Product');
+         Cart::add($product->id, $product->name, 1, $product->price)
+             ->associate('App\Models\Product');
  
-    //      return redirect()->route('cart.index')->with('success_message', 'Item was added to your cart!');
-    //  }
+         return redirect()->route('cart.index')->with('success_message', 'Item was added to your cart!');
+     }
  
     //  /**
     //   * Update the specified resource in storage.
@@ -74,18 +75,18 @@ class CartController extends Controller
     //      return response()->json(['success' => true]);
     //  }
  
-    //  /**
-    //   * Remove the specified resource from storage.
-    //   *
-    //   * @param  int  $id
-    //   * @return \Illuminate\Http\Response
-    //   */
-    //  public function destroy($id)
-    //  {
-    //      Cart::remove($id);
+     /**
+      * Remove the specified resource from storage.
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function destroy($id)
+     {
+         Cart::remove($id);
  
-    //      return back()->with('success_message', 'Item has been removed!');
-    //  }
+         return back()->with('success_message', 'Item has been removed!');
+     }
  
     //  /**
     //   * Switch item for shopping cart to Save for Later.

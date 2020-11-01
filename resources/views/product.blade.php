@@ -65,12 +65,12 @@
 
             <p>&nbsp;</p>
 
-            @if ($product->quantity > 0)
-                {{-- <form action="{{ route('cart.store', $product) }}" method="POST">
+            {{-- @if ($product->quantity > 0) --}}
+                <form action="{{ route('cart.store', $product) }}" method="POST">
                     {{ csrf_field() }}
                     <button type="submit" class="button button-plain">Add to Cart</button>
-                </form> --}}
-            @endif
+                </form>
+            {{-- @endif --}}
         </div>
     </div> <!-- end product-section -->
 
