@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Http\Controllers\LandingPageController@index')->name('landing-page');
+Route::get('/shop', 'App\Http\Controllers\ShopController@index')->name('shop.index');
+Route::get('/shop/{product}', 'App\Http\Controllers\ShopController@show')->name('shop.show');
+Route::get('/cart', 'App\Http\Controllers\CartController@index')->name('cart.index');
+Route::post('/cart/{product}', 'App\Http\Controllers\CartController@store')->name('cart.store');
+Route::patch('/cart/{product}', 'App\Http\Controllers\CartController@update')->name('cart.update');
+Route::delete('/cart/{product}', 'App\Http\Controllers\CartController@destroy')->name('cart.destroy');
+Route::post('/cart/switchToSaveForLater/{product}', 'App\Http\Controllers\CartController@switchToSaveForLater')->name('cart.switchToSaveForLater');
